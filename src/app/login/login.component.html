@@ -1,0 +1,41 @@
+<form *ngIf = "!isLoggedIn()"
+    [formGroup]="form"
+    (ngSubmit) = "login()"
+    class="form-inline">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input
+                    type="text"
+                    class="form-control disabled"
+                    id="username"
+                    formControlName="username"
+                    [readonly]="true"
+                />
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="form-group">
+                <input
+                    type="password"
+                    class="form-control disabled"
+                    id="password"
+                    formControlName="password"
+                    [readonly]="true"
+                />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <button
+                class="btn btn-success"
+                type="submit"
+                id="submitButton"
+            >
+            Login
+            </button>
+        </div>
+    </div>
+</form>
+<button *ngIf = "isLoggedIn()" type="button" class="btn btn-success" (click)="logout()">Logout</button>
