@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-6">
+        <a [style.display]="isLoggedIn()? 'inline-block': 'none'"
+            class="btn btn-success mb-2 mr-2"
+            routerLink="create">
+            Create Product
+        </a>
+    </div>
+</div>
+<div class="row" *ngIf ="isDataAvailable">
+    <div class="col-12">
+        <div class="table table-striped">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Available</th>
+                        <th>Date Created</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products;let i=index">
+                        <td>{{product.id}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.available}}</td>
+                        <td>{{product.price}}</td>
+                        <td>
+                            <div>
+                                <a title="View/Edit"
+                                    class="btn btn-outline-success btn-sm mx-1"
+                                    [routerLink]="[product.id]">
+                                    <i class="bx bx-edit-alt">View</i>
+                                </a>
+                                <a  [style.display]="isLoggedIn()? 'inline-block': 'none'"
+                                    title="Delete"
+                                    (click)="onDelete(product.id)"
+                                    class="btn btn-danger btn-sm mx-1">
+                                    <i class="bx bx-x">x</i>
+                                </a>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
