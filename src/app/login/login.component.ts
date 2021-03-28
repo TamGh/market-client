@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     public authService: AuthService)
     { }
@@ -46,5 +48,8 @@ export class LoginComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    if(this.router.url === '/create') {
+      this.router.navigate(['']);
+    }
   }
 }

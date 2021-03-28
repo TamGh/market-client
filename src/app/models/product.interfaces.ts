@@ -6,17 +6,24 @@ export interface IProductListItem {
 }
 
 export interface IProduct {
-    id: number;
+    id?: number;
     name: string;
     available: boolean;
     price: number;
     description: string;
-    dateCreated: Date;
+    dateCreated?: Date;
 }
 
 export interface IResponseModel<T> {
     data: T,
     message? : string;
-    responseType?: number;
+    responseType?: ResponseType;
+}
+
+export enum ResponseType {
+    Success = 1,
+    Info = 2,
+    Warning = 3,
+    Error = 4
 }
 

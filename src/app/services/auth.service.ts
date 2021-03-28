@@ -10,9 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
 
   url = environment.apiUrl;
-
   TokenSubject = new BehaviorSubject<string>(null);
-
 
   constructor(private http:HttpClient) { }
 
