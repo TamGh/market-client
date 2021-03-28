@@ -1,1 +1,189 @@
-<p>product works!</p>
+<form [formGroup]="productForm" (ngSubmit)="isCreateMode ? onCreate() : onUpdate()">
+    <div class="row mt-4 ml-4">
+        <a class="btn btn-outline-success mr-2"
+           [routerLink]="['']">
+            <i class="dripicons-arrow-thin-left"></i>
+            Back to list
+        </a>
+
+        <button
+            *ngIf="isLoggedIn()"
+            class="btn btn-success"
+            id="submitButton"
+            type="submit"
+        >
+            Save
+      </button>
+    </div>
+    
+        <div class="row mt-2 ml-2">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="productId">Product ID</label>
+                  <input
+                    type="text"
+                    id="productId"
+                    class="form-control"
+                    formControlName="id"
+                    [readonly]="true"
+                  />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="name">Product Name<span class="asterisk">&#42;</span></label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        formControlName="name"
+                        placeholder="Product Name"
+                        [ngClass]="{
+                        'is-invalid':
+                            submitted &&
+                            productForm.get('name').errors
+                        }"
+                    />
+                <div
+                    *ngIf="
+                    submitted &&
+                    productForm.get('name').errors
+                    "
+                    class="invalid-feedback"
+                >
+                    <span
+                    *ngIf="
+                    productForm.get('name').errors
+                        .required
+                    "
+                    >Required field</span
+                    >
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ml-2">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="dateCreated">Date Created</label>
+                    <input
+                        type="datetime"
+                        class="form-control disabled"
+                        id="dateCreated"
+                        formControlName="dateCreated"
+                        [readonly]="true"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="price"
+                    >Price<span class="asterisk">&#42;</span></label
+                  >
+                  <input
+                    type="text"
+                    id="price"
+                    class="form-control"
+                    placeholder="Price"
+                    formControlName="price"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted &&
+                        productForm.get('price').errors
+                    }"
+                  />
+                  <div
+                          *ngIf="
+                            submitted &&
+                            productForm.get('price').errors
+                          "
+                          class="invalid-feedback"
+                        >
+                          <div
+                            [hidden]="
+                              !productForm.get('price')
+                                .errors.required
+                            "
+                          >
+                            Required field
+                          </div>
+
+                          <div
+                            [hidden]="
+                              !productForm.get('price')
+                                .errors.validateOnlyNumbers
+                            "
+                          >
+                            
+                            {{ productForm.get('price').errors?.validateOnlyNumbers?.validateText }}
+                            
+                          </div>
+
+                          
+                            <div
+                              [hidden]="
+                                !productForm.get('price')
+                                  .errors.validateDecimalPattern
+                              "
+                            >
+                              {{
+                                productForm.get('price')
+                                  .errors.validateDecimalPattern &&
+                                  productForm.get('price')
+                                    .errors.validateDecimalPattern.errorText
+                              }}
+                            </div>
+                          
+                 </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ml-2">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="available">Available</label>
+                  <input
+                    class="checkbox ml-2"
+                    type="checkbox"
+                    id="available"
+                    formControlName="available"
+                  />
+                </div>
+            </div>
+        </div>
+        <div class="row ml-2">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="description">Description<span class="asterisk">&#42;</span></label>
+                    <textarea
+                        class="form-control"
+                        id="description"
+                        formControlName="description"
+                        placeholder="Description"
+                        [ngClass]="{
+                        'is-invalid':
+                            submitted &&
+                            productForm.get('description').errors
+                        }"
+                    ></textarea>
+                <div
+                    *ngIf="
+                    submitted &&
+                    productForm.get('description').errors
+                    "
+                    class="invalid-feedback"
+                >
+                    <span
+                    *ngIf="
+                    productForm.get('description').errors
+                        .required
+                    "
+                    >Required field</span
+                    >
+                </div>
+                </div>
+            </div>
+        </div>
+    
+</form>
+
